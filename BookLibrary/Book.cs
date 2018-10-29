@@ -32,7 +32,7 @@ namespace BookLibrary
         /// <param name="price">
         /// The price.
         /// </param>
-        public Book(string title, string author, int year, string publishingHouse, int edition, int pages, double price)
+        public Book(string title, string author, int year, string publishingHouse, int edition, int pages, decimal price)
         {
             Title = title;
             Author = author;
@@ -76,7 +76,7 @@ namespace BookLibrary
         /// <summary>
         /// Gets the price.
         /// </summary>
-        public double Price { get; }
+        public decimal Price { get; }
 
         /// <summary>
         /// Gets the instance of a book as a string.
