@@ -27,7 +27,7 @@ namespace BookExtension
         {
             if (arg == null || format != "Q")
             {
-                return string.Format(_parent, "{0:" + format + "}", arg);
+                return string.Format(_parent, "{0:" + format + "}", arg); //returns string according to parent IFormatProvider.
             }
 
             Book book = arg as Book;
