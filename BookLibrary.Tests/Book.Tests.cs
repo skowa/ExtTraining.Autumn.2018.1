@@ -24,6 +24,7 @@ namespace BookLibrary.Tests
         public void ToStringTests_WrongFormat_ThrowsFormatException()
             => Assert.Throws<FormatException>(() =>
                 new Book("C# in Depth", "Jon Skeet", 2019, "Manning", 4, 900, 40).ToString("N"));
+        
     }
 
     internal class DataForToStringTests : IEnumerable
@@ -60,6 +61,8 @@ namespace BookLibrary.Tests
             yield return new TestCaseData(book, "G", CultureInfo.GetCultureInfo("en-US")).Returns("Book record: Jon Skeet, C# in Depth, 2019, Manning, 4, 900, $40.00");
             yield return new TestCaseData(book, "Y", CultureInfo.GetCultureInfo("en-US")).Returns("Book record: Jon Skeet, C# in Depth, 2019");
             yield return new TestCaseData(book, "M", CultureInfo.GetCultureInfo("en-US")).Returns("Book record: C# in Depth, $40.00");
+            yield return new TestCaseData(book, "Y", CultureInfo.GetCultureInfo("en-US").DateTimeFormat).Returns("Book record: Jon Skeet, C# in Depth, 2019");
+            yield return new TestCaseData(book, "M", CultureInfo.GetCultureInfo("en-EN").NumberFormat).Returns($"Book record: C# in Depth, {book.Price.ToString("C", CultureInfo.GetCultureInfo("en-EN").NumberFormat)}");
         }
     }
 }
