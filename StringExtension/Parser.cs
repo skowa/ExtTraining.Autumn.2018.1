@@ -24,21 +24,33 @@ namespace StringExtension
             char[] numerals = source.ToCharArray();
             string numeralsValues = "0123456789ABCDEF";
 
-            int result = 0;
-
-            checked
+            if (numerals[0] == '-')
             {
-                for (int i = 0; i < numerals.Length; i++)
-                {
-                    int index = numeralsValues.IndexOf(numerals[i].ToString(), StringComparison.OrdinalIgnoreCase);
-                    if (index >= @base || index == -1)
-                    {
-                        throw new ArgumentException($"{nameof(numerals)} is bad for {nameof(@base)}");
-                    }
+                throw new ArgumentException($"{nameof(source)} is negative.");
+            }
 
-                    result += index * (int)Math.Pow(@base, numerals.Length - i - 1);
+            int result = 0;
+            try
+            {
+                checked
+                {
+                    for (int i = 0; i < numerals.Length; i++)
+                    {
+                        int index = numeralsValues.IndexOf(numerals[i].ToString(), StringComparison.OrdinalIgnoreCase);
+                        if (index >= @base || index == -1)
+                        {
+                            throw new ArgumentException($"{nameof(source)} is invalid for {nameof(@base)}");
+                        }
+
+                        result += index * (int)Math.Pow(@base, numerals.Length - i - 1);
+                    }
                 }
             }
+            catch (OverflowException)
+            {
+                throw new ArgumentException($"{nameof(source)} is too big for {typeof(int)}");
+            }
+            
             
             return result;
         }
