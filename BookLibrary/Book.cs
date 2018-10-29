@@ -107,7 +107,7 @@ namespace BookLibrary
         /// Gets the instance of a book as a string in special format according to special culture.
         /// </summary>
         /// <param name="format">
-        /// The format in which the instance of a book is represented. G is an overrided ToString.
+        /// The format in which the instance of a book is represented. G is an overrided ToString().
         /// </param>
         /// <param name="formatProvider">
         /// The format according to which some objects are formatted.

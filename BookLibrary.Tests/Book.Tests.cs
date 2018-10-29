@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace BookLibrary.Tests
@@ -34,7 +30,7 @@ namespace BookLibrary.Tests
     {
         public IEnumerator GetEnumerator()
         {
-            yield return new TestCaseData(new Book("C# in Depth", "Jon Skeet", 2019, "Manning", 4, 900, 40)).Returns("Book record: Jon Skeet, C# in Depth, 2019, Manning, 4, 900, 40,00 ₽");
+            yield return new TestCaseData(new Book("C# in Depth", "Jon Skeet", 2019, "Manning", 4, 900, 40)).Returns($"Book record: Jon Skeet, C# in Depth, 2019, Manning, 4, 900, {40.ToString("C", CultureInfo.CurrentCulture)}");
         }
     }
 
@@ -50,7 +46,7 @@ namespace BookLibrary.Tests
             yield return new TestCaseData(book, "P").Returns("Book record: Jon Skeet, C# in Depth, 2019, Manning");
             yield return new TestCaseData(book, "T").Returns("Book record: C# in Depth");
             yield return new TestCaseData(book, "H").Returns("Book record: C# in Depth, 2019, Manning");
-            yield return new TestCaseData(book, "M").Returns("Book record: C# in Depth, 40,00 ₽");
+            yield return new TestCaseData(book, "M").Returns($"Book record: C# in Depth, {book.Price.ToString("C", CultureInfo.CurrentCulture)}");
             yield return new TestCaseData(book, "E").Returns("Book record: Jon Skeet, C# in Depth, 4, 900");
         }
     }
